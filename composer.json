@@ -34,7 +34,8 @@
         "symfony/property-access": "^5.1",
         "hyperf/constants": "^2.0",
         "hyperf/validation": "^2.0",
-        "hyperf/exception-handler": "^2.0"
+        "hyperf/exception-handler": "^2.0",
+        "hyperf/paginator": "^2.0"
     },
     "require-dev": {
         "swoole/ide-helper": "^4.5",

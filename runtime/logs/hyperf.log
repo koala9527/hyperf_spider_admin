@@ -36,3 +36,6 @@
 [2020-08-26 16:26:46] sql.INFO: [3.55] select * from `admin` where (`username` = 'username' and `password` = '25faf74c0ecfd9adb56475538545511d') and `admin`.`deleted_at` is null limit 1 [] []
 [2020-08-26 16:27:00] sql.INFO: [3.39] select * from `admin` where (`username` = '123') and `admin`.`deleted_at` is null limit 1 [] []
 [2020-08-26 16:27:00] sql.INFO: [3.75] select * from `admin` where (`username` = 'username' and `password` = '25faf74c0ecfd9adb56475538545511d') and `admin`.`deleted_at` is null limit 1 [] []
+[2020-09-01 18:01:31] sql.INFO: [420.77] SELECT * FROM code_res limit 1; [] []
+[2020-09-01 18:15:48] sql.INFO: [41.59] select `column_key`, `column_name`, `data_type`, `column_comment`, `extra` from information_schema.columns where `table_schema` = 'business_product' and `table_name` = 'code_res' order by ORDINAL_POSITION [] []
+[2020-09-01 18:26:08] sql.INFO: [18.2] select `column_key`, `column_name`, `data_type`, `column_comment`, `extra` from information_schema.columns where `table_schema` = 'business_product' and `table_name` = 'code_detail_update' order by ORDINAL_POSITION [] []
