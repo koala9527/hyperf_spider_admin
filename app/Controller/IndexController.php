@@ -17,25 +17,31 @@ use App\JsonRpc\CeshiServiceInterface;
 
 class IndexController extends AbstractController
 {
-        /**
-     * 代理商服务
-     *
-     * @var CeshiServiceInterface
-     */
-    private $service;
+    //     /**
+    //  * 代理商服务
+    //  *
+    //  * @var CeshiServiceInterface
+    //  */
+    // private $service;
 
-    public function __construct()
-    {
-        $this->service = ApplicationContext::getContainer()->get(CeshiServiceInterface::class);
-    }
+    // public function __construct()
+    // {
+    //     $this->service = ApplicationContext::getContainer()->get(CeshiServiceInterface::class);
+    // }
 
-    public function index()
+    // public function index()
+    // {
+    //     $testdata =  $this->service->addComplaintData();
+    //     return [
+    //         'test'=>$testdata
+    //     ];
+    // }
+
+    public function test()
     {
-        $testdata =  $this->service->addComplaintData();
         return [
-            'test'=>$testdata
+            'test'=>'suc'
         ];
     }
-
 
 }

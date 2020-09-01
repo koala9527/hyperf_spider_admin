@@ -24,6 +24,7 @@ class ComposerStaticInit9a32096a87427d58146d7c9dfd1a0410
         '46a9bb9cbc7a6a5c34938373dbe690c3' => __DIR__ . '/..' . '/hyperf/di/src/Functions.php',
         '7e9bd612cc444b3eed788ebbe46263a0' => __DIR__ . '/..' . '/laminas/laminas-zendframework-bridge/src/autoload.php',
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
+        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
@@ -34,9 +35,17 @@ class ComposerStaticInit9a32096a87427d58146d7c9dfd1a0410
     );
 
     public static $prefixLengthsPsr4 = array (
+        'v' => 
+        array (
+            'voku\\' => 5,
+        ),
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
+        ),
+        'd' => 
+        array (
+            'duncan3dc\\Laravel\\' => 18,
         ),
         'W' => 
         array (
@@ -98,12 +107,23 @@ class ComposerStaticInit9a32096a87427d58146d7c9dfd1a0410
             'Laminas\\Stdlib\\' => 15,
             'Laminas\\Mime\\' => 13,
         ),
+        'I' => 
+        array (
+            'Illuminate\\View\\' => 16,
+            'Illuminate\\Support\\' => 19,
+            'Illuminate\\Filesystem\\' => 22,
+            'Illuminate\\Events\\' => 18,
+            'Illuminate\\Contracts\\' => 21,
+            'Illuminate\\Container\\' => 21,
+        ),
         'H' => 
         array (
+            'Hyperf\\View\\' => 12,
             'Hyperf\\Validation\\' => 18,
             'Hyperf\\Utils\\' => 13,
             'Hyperf\\Translation\\' => 19,
             'Hyperf\\Testing\\' => 15,
+            'Hyperf\\Task\\' => 12,
             'Hyperf\\ServiceGovernance\\' => 25,
             'Hyperf\\Server\\' => 14,
             'Hyperf\\Rpc\\' => 11,
@@ -179,11 +199,19 @@ class ComposerStaticInit9a32096a87427d58146d7c9dfd1a0410
     );
 
     public static $prefixDirsPsr4 = array (
+        'voku\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/voku/portable-ascii/src/voku',
+        ),
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'duncan3dc\\Laravel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/duncan3dc/blade/src',
         ),
         'Webmozart\\Assert\\' => 
         array (
@@ -354,6 +382,34 @@ class ComposerStaticInit9a32096a87427d58146d7c9dfd1a0410
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-mime/src',
         ),
+        'Illuminate\\View\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/view',
+        ),
+        'Illuminate\\Support\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/support',
+        ),
+        'Illuminate\\Filesystem\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/filesystem',
+        ),
+        'Illuminate\\Events\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/events',
+        ),
+        'Illuminate\\Contracts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/contracts',
+        ),
+        'Illuminate\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/container',
+        ),
+        'Hyperf\\View\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hyperf/view/src',
+        ),
         'Hyperf\\Validation\\' => 
         array (
             0 => __DIR__ . '/..' . '/hyperf/validation/src',
@@ -369,6 +425,10 @@ class ComposerStaticInit9a32096a87427d58146d7c9dfd1a0410
         'Hyperf\\Testing\\' => 
         array (
             0 => __DIR__ . '/..' . '/hyperf/testing/src',
+        ),
+        'Hyperf\\Task\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hyperf/task/src',
         ),
         'Hyperf\\ServiceGovernance\\' => 
         array (

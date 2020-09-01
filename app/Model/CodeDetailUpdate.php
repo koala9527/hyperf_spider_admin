@@ -14,6 +14,14 @@ class CodeDetailUpdate extends Model
      * @var string
      */
     protected $table = 'code_detail_update';
+
+    /**
+     * The connection name for the model.
+     *
+     * @var string
+     */
+    protected $connection = 'XCWY';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -28,7 +36,9 @@ class CodeDetailUpdate extends Model
     protected $casts = [];
     
     public static function getCodeList($keyword,$page,$page_size,$one_class,$two_class){
-        $list = self::where('title', 'like', '%' . $keyword . '%')->orderBy('id', 'desc')->paginate($page_size, ['*'], 'page', $page);
+        $params = [];
+        if ($one_class) $params['firstOneTag'] = $one_class;
+        $list = self::where($params)->where('secondOneTag', 'like', '%' . $two_class . '%')->where('pcode', 'like', '%' . $keyword . '%')->orderBy('id', 'desc')->paginate($page_size, ['*'], 'page', $page);
         return $list ? $list->toArray() : [];
     }
 }

@@ -35,7 +35,10 @@
         "hyperf/constants": "^2.0",
         "hyperf/validation": "^2.0",
         "hyperf/exception-handler": "^2.0",
-        "hyperf/paginator": "^2.0"
+        "hyperf/paginator": "^2.0",
+        "hyperf/view": "^2.0",
+        "duncan3dc/blade": "^4.10",
+        "hyperf/task": "^2.0"
     },
     "require-dev": {
         "swoole/ide-helper": "^4.5",

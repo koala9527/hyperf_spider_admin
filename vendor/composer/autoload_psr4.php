@@ -6,7 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'voku\\' => array($vendorDir . '/voku/portable-ascii/src/voku'),
     'phpDocumentor\\Reflection\\' => array($vendorDir . '/phpdocumentor/reflection-common/src', $vendorDir . '/phpdocumentor/reflection-docblock/src', $vendorDir . '/phpdocumentor/type-resolver/src'),
+    'duncan3dc\\Laravel\\' => array($vendorDir . '/duncan3dc/blade/src'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Php73\\' => array($vendorDir . '/symfony/polyfill-php73'),
@@ -49,10 +51,18 @@ return array(
     'Laminas\\ZendFrameworkBridge\\' => array($vendorDir . '/laminas/laminas-zendframework-bridge/src'),
     'Laminas\\Stdlib\\' => array($vendorDir . '/laminas/laminas-stdlib/src'),
     'Laminas\\Mime\\' => array($vendorDir . '/laminas/laminas-mime/src'),
+    'Illuminate\\View\\' => array($vendorDir . '/illuminate/view'),
+    'Illuminate\\Support\\' => array($vendorDir . '/illuminate/support'),
+    'Illuminate\\Filesystem\\' => array($vendorDir . '/illuminate/filesystem'),
+    'Illuminate\\Events\\' => array($vendorDir . '/illuminate/events'),
+    'Illuminate\\Contracts\\' => array($vendorDir . '/illuminate/contracts'),
+    'Illuminate\\Container\\' => array($vendorDir . '/illuminate/container'),
+    'Hyperf\\View\\' => array($vendorDir . '/hyperf/view/src'),
     'Hyperf\\Validation\\' => array($vendorDir . '/hyperf/validation/src'),
     'Hyperf\\Utils\\' => array($vendorDir . '/hyperf/utils/src'),
     'Hyperf\\Translation\\' => array($vendorDir . '/hyperf/translation/src'),
     'Hyperf\\Testing\\' => array($vendorDir . '/hyperf/testing/src'),
+    'Hyperf\\Task\\' => array($vendorDir . '/hyperf/task/src'),
     'Hyperf\\ServiceGovernance\\' => array($vendorDir . '/hyperf/service-governance/src'),
     'Hyperf\\Server\\' => array($vendorDir . '/hyperf/server/src'),
     'Hyperf\\Rpc\\' => array($vendorDir . '/hyperf/rpc/src'),
