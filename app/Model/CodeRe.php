@@ -15,12 +15,6 @@ class CodeRe extends Model
      */
     protected $table = 'code_res';
 
-        /**
-     * The connection name for the model.
-     *
-     * @var string
-     */
-    protected $connection = 'XCWY';
 
     /**
      * The attributes that are mass assignable.
@@ -35,5 +29,8 @@ class CodeRe extends Model
      */
     protected $casts = [];
 
-
+    public static function getCodeGui($id,$text){
+        $res =  self::where(['proId'=>$id,'name'=>$text])->value("content");
+        return $res ? $res: [];
+    }
 }

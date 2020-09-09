@@ -16,9 +16,7 @@ return [
             App\Exception\Handler\ValidationExceptionHandler::class,   //数据验证异常处理
             App\Exception\Handler\BusinessExceptionHandler::class,   //手动抛出异常
             App\Exception\Handler\AppExceptionHandler::class, //代码逻辑异常
-        ],
-        'jsonrpc' => [
-            App\Exception\Handler\ValidationRpcExceptionHandler::class,
-        ],
+        ]
+
     ],
 ];

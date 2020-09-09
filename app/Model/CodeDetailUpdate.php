@@ -15,12 +15,6 @@ class CodeDetailUpdate extends Model
      */
     protected $table = 'code_detail_update';
 
-    /**
-     * The connection name for the model.
-     *
-     * @var string
-     */
-    protected $connection = 'XCWY';
 
     /**
      * The attributes that are mass assignable.
@@ -35,10 +29,54 @@ class CodeDetailUpdate extends Model
      */
     protected $casts = [];
     
-    public static function getCodeList($keyword,$page,$page_size,$one_class,$two_class){
+    public static function getCodeList($spn,$keyword,$page,$page_size,$one_class,$two_class){
         $params = [];
         if ($one_class) $params['firstOneTag'] = $one_class;
-        $list = self::where($params)->where('secondOneTag', 'like', '%' . $two_class . '%')->where('pcode', 'like', '%' . $keyword . '%')->orderBy('id', 'desc')->paginate($page_size, ['*'], 'page', $page);
+        $list = self::where($params)->where('secondOneTag', 'like', '%' . $two_class . '%')->where('spncode', 'like', '%' . $spn . '%')->where('pcode', 'like', '%' . $keyword . '%')->orderBy('id', 'desc')->paginate($page_size, ['*'], 'page', $page);
         return $list ? $list->toArray() : [];
+    }
+
+    public static function getCodeDetail($id){
+        $res =  self::where(['id'=>$id])->get();
+        return $res ? $res->toArray() : [];
+    }
+
+    public static function getTwoClass($one)
+    {
+        $res =  self::select("secondOneTag","firstOneTag")->where(['firstOneTag'=>$one])->groupBy('secondOneTag')->get();
+        $result=[];
+        foreach($res as $k=>$v){
+            if(!empty($v['secondOneTag'])){
+                if(strpos($v['secondOneTag'],',') !== false){
+                    $pieces = explode(",",$v['secondOneTag']);
+                    foreach($pieces as $key=>$val){
+                        // array_push($result,$val);
+                        
+                        $result[] = $val;
+                    } 
+                }else{
+                    // array_push($result,$v['secondOneTag']);
+
+                    $result[] = $v['secondOneTag'];
+                }
+            }
+        }
+        $result = array_unique($result);
+        $all_res=[];
+        foreach($result as $ke=>$va){
+            $all_res[]=$va;
+        }
+        return $all_res;
+    }
+
+    public static function changeStatus($id)
+    {
+        $res =  self::where(['id'=>$id])->value("status");
+        if($res=='0'){
+            $update = '1';
+        }else{
+            $update = '0';
+        }
+        self::where(['id'=>$id])->update(['status' => $update]);
     }
 }
