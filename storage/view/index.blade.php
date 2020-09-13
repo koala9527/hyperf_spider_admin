@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Layui</title>
+  <title>故障码</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -97,20 +97,19 @@ form {
   <button type="submit" class="layui-btn layui-inline" lay-submit="" lay-filter="errcode">立即提交</button>
               
 </form>  
-<table class="layui-table" lay-data="{ url:'/admin/agent/getcodelistdata', page:true, id:'idTest',limit:20,limits:[15,60,90]}" lay-filter="demo" id="demo">
+<table class="layui-table" lay-data="{ url:'/admin/agent/getcodelistdata', page:true, id:'idTest',limit:20,limits:[20,40,100]}" lay-filter="demo" id="demo">
   <thead>
     <tr>
-      <th lay-data="{field:'id', width:'5%', title: 'ID', sort: true}">ID</th>
-      <th lay-data="{field:'pcode', width:'8%', title: '故障码'}">用户名</th>
-      <th lay-data="{field:'spncode', width:'8%', title: 'spn'}">用户名</th>
-      <th lay-data="{field:'firstOneTag', width:'8%', title: '厂家', sort: true}">性别</th>
-      <th lay-data="{field:'secondOneTag', width:'10%', title: '电脑版'}">城市</th>
-      <th lay-data="{field:'descs', width:'15%', title: '故障描述'}">签名</th>
-      <th lay-data="{field:'symptom', title: '故障现象', width: '15%', minWidth: 100} ">积分</th>
-      
-      <th lay-data="{field:'the_system', title: '适用车型', width: '20%', minWidth: 100} ">职业</th>
-      <th lay-data="{field:'lock', title:'是否标记',width: '7%', templet: '#checkboxTpl'}">财富</th>
-      <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>
+      <th lay-data="{field:'id', width:'5%', title: 'ID', sort: true}"></th>
+      <th lay-data="{field:'pcode', width:'8%', title: '故障码'}"></th>
+      <th lay-data="{field:'spncode', width:'8%', title: 'spn'}"></th>
+      <th lay-data="{field:'firstOneTag', width:'8%', title: '厂家', sort: true}"></th>
+      <th lay-data="{field:'secondOneTag', width:'10%', title: '电脑版'}"></th>
+      <th lay-data="{field:'descs', width:'15%', title: '故障描述'}"></th>
+      <th lay-data="{field:'symptom', title: '故障现象', width: '15%', minWidth: 100} "></th>
+      <th lay-data="{field:'the_system', title: '适用车型', width: '20%', minWidth: 100} "></th>
+      <th lay-data="{field:'lock', title:'是否标记',width: '7%', templet: '#checkboxTpl'}"></th>
+      <th lay-data="{fixed: 'right', width:'5%', align:'center', toolbar: '#barDemo'}"></th>
     </tr>
   </thead>
 </table>
@@ -145,10 +144,9 @@ layui.use(['form', 'layedit','table','element','laytpl'], function(){
  table.on('tool(demo)', function(obj){
     var data = obj.data;
     if(obj.event === 'detail'){
-      layer.msg('ID：'+ data.id + ' 的查看操作');
       var token = localStorage.getItem("token");
       if (token){
-        window.open("http://127.0.0.1:8591/admin/agent/code?id="+data.id+"&token="+token)
+        window.open("/admin/agent/code?id="+data.id+"&token="+token)
       }else{
         layer.msg('没有登录', {icon: 6}); 
       }

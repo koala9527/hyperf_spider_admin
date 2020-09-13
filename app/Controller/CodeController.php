@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Model\CodeDetailUpdate;
 use App\Model\CodeRe;
 use App\Model\Admin;
+use App\Model\MyLog;
 use App\Tool\Token;
 use Hyperf\HttpServer\Contract\RequestInterface;
 use Hyperf\HttpServer\Contract\ResponseInterface;
@@ -130,7 +131,7 @@ class CodeController extends BaseController
      * @RequestMapping(path="showguide",methods = "get")
      * 
      */
-    public function showguide(RequestInterface $request,RenderInterface $render)
+    public function showguide(RequestInterface $request,RenderInterface $render,ResponseInterface $response)
     {
         $token = new Token();
         $request_token = $request->input('token');
@@ -146,12 +147,16 @@ class CodeController extends BaseController
         if(empty($id)||empty($text)){
             return ['504'];
         }else{
-            $data = CodeRe::getCodeGui($id,$text);
+            $data = CodeRe::getCodeGui($id,$text)[0];
             if(empty($data)){
-                return '有没有相关内容';
+                $res = $this->write_log($id,$text);
+                return $response->json(['msg'=>'没有相关内容'.$res,'code'=>'400']);
+                
+            }else if(empty($data['content'])){
+                return $response->json(['msg'=>'真的没有相关内容','code'=>'400']); 
             }
         }
-        return $data;
+        return $response->json(['msg'=>'查询成功','code'=>'200','data'=>$data]); 
     }
 
     /**
@@ -164,5 +169,9 @@ class CodeController extends BaseController
         $id = $request->input('id');
         $data = CodeDetailUpdate::changeStatus($id);
         return '更改已发送';
+    }
+
+    private function write_log($id,$text){
+        return MyLog::save_data($id,$text);
     }
 }
