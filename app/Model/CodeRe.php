@@ -30,7 +30,7 @@ class CodeRe extends Model
     protected $casts = [];
 
     public static function getCodeGui($id,$text){
-        $res =  self::where(['proId'=>$id,'name'=>$text])->value("content");
+        $res =  self::where(['proId'=>$id,'name'=>$text])->get();
         return $res ? $res: [];
     }
 }

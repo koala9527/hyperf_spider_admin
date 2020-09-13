@@ -31,8 +31,11 @@ class CodeDetailUpdate extends Model
     
     public static function getCodeList($spn,$keyword,$page,$page_size,$one_class,$two_class){
         $params = [];
-        if ($one_class) $params['firstOneTag'] = $one_class;
-        $list = self::where($params)->where('secondOneTag', 'like', '%' . $two_class . '%')->where('spncode', 'like', '%' . $spn . '%')->where('pcode', 'like', '%' . $keyword . '%')->orderBy('id', 'desc')->paginate($page_size, ['*'], 'page', $page);
+        if (!empty($one_class)) $params[] = ['firstOneTag',$one_class];
+        if (!empty($two_class))$params[] = ['secondOneTag', 'like', '%'.$two_class.'%'];
+        if (!empty($spn))$params[] = ['spncode', 'like', '%'.$spn.'%'];
+        if (!empty($keyword))$params[] = ['pcode', 'like', '%'.$keyword.'%'];
+        $list = self::where($params)->orderBy('id', 'desc')->paginate($page_size, ['*'], 'page', $page);
         return $list ? $list->toArray() : [];
     }
 

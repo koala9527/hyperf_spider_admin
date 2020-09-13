@@ -16,5 +16,4 @@
 
 <script>alert('{{$msg}}');window.location.href='{{$url}}'</script>
 </body>
-</script>
 </html>
