@@ -70,6 +70,13 @@ form {
         <option value="">请选择电控系统</option>
       </select>
     </div>
+    <div class="layui-input-inline">
+    <select name="three_class" id="three_selects">
+      <option value="">全部</option>
+        <option value="0">未标记</option>
+        <option value="1">已标记</option>
+      </select>
+    </div>
   </div>
 
 
@@ -223,6 +230,7 @@ layui.use(['form', 'layedit','table','element','laytpl'], function(){
                 , where: {//这里传参  向后台
                   one_class :formData.one_class,
                   two_class:formData.two_class,
+                  three_class:formData.three_class,
                   keyword: keyword,
                   spn:formData.spn
                     //可传多个参数到后台...  ，分隔

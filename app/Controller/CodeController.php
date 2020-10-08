@@ -38,7 +38,8 @@ class CodeController extends BaseController
         $page_size = (int) $request->input('limit', 20);
         $keyword = $request->input('keyword', '');
         $spn = $request->input('spn', '');
-        $data = CodeDetailUpdate::getCodeList($spn,$keyword,$page,$page_size,$one_class,$two_class);
+        $three_class =  (string)$request->input('three_class','');
+        $data = CodeDetailUpdate::getCodeList($spn,$keyword,$page,$page_size,$one_class,$two_class,$three_class);
         return $response->json(['code' => 0, 'msg' => '加载成功！', 'data' => $data['data'],"count"=>$data['total'],'last'=>$data['last_page'],'limit'=>$page_size]);
         
     }
@@ -62,13 +63,14 @@ class CodeController extends BaseController
             return $render->render('err',['msg'=>'登录过期，请重新登录','url'=>'/login/mylogin']);
         }
         $user_info = Admin::query()->where(['id' => $user_id])->first(['username', 'avatar']);
-        $one_class = $request->input('one_class',null);
-        $two_class =  $request->input('two_class',null);
+        $one_class = $request->input('one_class','');
+        $two_class =  $request->input('two_class','');
+        $three_class =  (string)$request->input('three_class','');
         $page = (int) $request->input('page', 1);
         $page_size = (int) $request->input('limit', 20);
         $keyword = $request->input('keyword', '');
         $spn = $request->input('spn', '');
-        $data = CodeDetailUpdate::getCodeList($spn,$keyword,$page,$page_size,$one_class,$two_class);
+        $data = CodeDetailUpdate::getCodeList($spn,$keyword,$page,$page_size,$one_class,$two_class,$three_class);
         $one_select =array("ABS","Ecofit","VE/VP泵","五十铃","依米泰克","其他ECU","其他后处理","凯德斯","凯龙","单体泵","南岳","博世","博世2.0","博世2.2","博世6.5","卡特挖机","天然气","天纳克","威孚力达","小松挖机","康明斯","德尔福","挖机","新风","日立挖机","易控","潍柴自主","玉柴自主","电装","神钢挖机","艾可蓝","解放自主","重汽自主","其他");
         return $render->render('index',['code' => 0, 'msg' => '加载成功！', 'data' => $data['data'],"count"=>$data['total'],'last'=>$data['last_page'],'limit'=>$page_size,'one_select'=>$one_select,'keyword'=>$keyword,'spn'=>$spn,'username'=>$user_info['username']]);
     }

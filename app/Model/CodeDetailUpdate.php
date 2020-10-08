@@ -29,10 +29,20 @@ class CodeDetailUpdate extends Model
      */
     protected $casts = [];
     
-    public static function getCodeList($spn,$keyword,$page,$page_size,$one_class,$two_class){
+    public static function getCodeList($spn,$keyword,$page,$page_size,$one_class,$two_class,$three_class){
+        $three_class = (string)$three_class;
         $params = [];
-        if ($one_class) $params['firstOneTag'] = $one_class;
-        $list = self::where($params)->where('secondOneTag', 'like', '%' . $two_class . '%')->where('spncode', 'like', '%' . $spn . '%')->where('pcode', 'like', '%' . $keyword . '%')->orderBy('id', 'desc')->paginate($page_size, ['*'], 'page', $page);
+        if ($one_class) $params[] = ['firstOneTag',$one_class];
+        if($two_class) $params[]=['secondOneTag','like','%'.$two_class.'%'];
+        if($spn) $params[]=['spncode','like','%'.$spn.'%'];
+        if($keyword)$params[]=['pcode','like','%'.$keyword.'%'];
+        if($three_class=='1')
+        {
+            $params[]=['status',$three_class];
+        }else if($three_class=='0'){
+            $params[]=['status','0'];
+        };
+        $list = self::where($params)->orderBy('id', 'desc')->paginate($page_size, ['*'], 'page', $page);
         return $list ? $list->toArray() : [];
     }
 

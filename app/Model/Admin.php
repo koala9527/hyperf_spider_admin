@@ -30,5 +30,5 @@ class Admin extends Model
     
     protected $casts = ['id' => 'integer', 'status' => 'integer', 'is_admin' => 'integer', 'created_at' => 'datetime', 'updated_at' => 'datetime'];
 
-    protected $hidden = ['password', 'created_at', 'updated_at', 'deleted_at'];
+    protected $hidden = ['password'];
 }

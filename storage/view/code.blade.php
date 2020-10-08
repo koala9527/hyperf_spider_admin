@@ -37,7 +37,10 @@
     </tr>
     </thead>
     <tbody>
-
+    <tr>
+        <td>spn码</td>
+        <td>{{$data['spncode']}}</td>
+    </tr>
     <tr>
         <td>厂家</td>
         <td>{{$data['firstOneTag']}}</td>
@@ -86,11 +89,13 @@
 <fieldset class="layui-elem-field">
     <legend>加载详情：</legend>
     <div class="layui-field-box showdetailhtml" id="guides"></div>
+    <div class="layui-field-box othershowdetailhtml"  style="display:none"></div>
 </fieldset>
 
 <input type="hidden" value="" id='target'>
 </body>
 <script>
+
     $(function () {
       $(".proClick").click(function () {
         var content = $(this).text();
@@ -115,8 +120,17 @@
                 if(data['code']=='200'){
                     console.log(data['msg']);
                     console.log(data['data']['content']);
+                    $("#others").css('display','block');
+                    $(".othershowdetailhtml").css('display','none');
                     $('.showdetailhtml').html(data['data']['content']);
+                    $("#data_1_0").css('display','block');
+                    $("#data_2_0").css('display','block');
+                    $("#data_3_0").css('display','block');
+                    $("#data_4_0").css('display','block');
+                    $("#data_5_0").css('display','block');
+                    
                 }else{
+                    $("#others").css('display','block');
                     $('.showdetailhtml').html(data['msg']);
                 }
 
@@ -133,14 +147,11 @@
       })
     });
 
-    $(function () {
       $(".open-term").click(function () {
         var content = $(this).text();
         var val = $(this).attr("proid");
-// console.log(content);
-// console.log(val);
-
-
+        console.log(content);
+        console.log(val);
         if ($('#selected').length > 0) {
           var id = $("#selected").attr("value");
           console.log("开始加载")
@@ -157,7 +168,63 @@
                 if(data['code']=='200'){
                     console.log(data['msg']);
                     console.log(data['data']['content']);
+                    $(".othershowdetailhtml").css('display','none');
                     $('.showdetailhtml').html(data['data']['content']);
+                    $("#data_1_0").css('display','block');
+                    $("#data_2_0").css('display','block');
+                    $("#data_3_0").css('display','block');
+                    $("#data_4_0").css('display','block');
+                    $("#data_5_0").css('display','block');
+                }else{
+                    $('.showdetailhtml').html(data['data']['content']);
+
+                }
+
+            },
+            error: function (error) {
+              console.log(error)
+            }
+          })
+        } else {
+
+          layer.msg('还没有选择电控系统！');
+        }
+
+
+      });
+
+
+      $("body").delegate(".open-term","click", function(){
+        var content = $(this).text();
+        var id = $("#selected").attr("value");
+        if ($('#selected').length > 0) {
+          var id = $("#selected").attr("value");
+          console.log("开始加载")
+          //做标记给后面换电控系统识别
+          $('#target').attr("value", content);//给一个隐藏的元素添加content的值，后面好取一点
+          var token = localStorage.getItem("token");
+//get()方式
+          $.ajax({
+              url: '/admin/agent/showguide',
+              dataType: 'json',
+              data: { 'id': id, 'text': content,'token':token },
+            success: function (data) {
+              console.log(data);
+                if(data['code']=='200'){
+                    console.log(data['msg']);
+                    console.log(data['data']['content']);
+                    
+                    $(".othershowdetailhtml").css('display','block');
+                    $('.othershowdetailhtml').html(data['data']['content']);
+                    if ($('.showdetailhtml').html() == $(".othershowdetailhtml").html()){
+                        $(".othershowdetailhtml").css('display','none');
+                    }
+                    $("#data_1_0").css('display','block');
+                    $("#data_2_0").css('display','block');
+                    $("#data_3_0").css('display','block');
+                    $("#data_4_0").css('display','block');
+                    $("#data_5_0").css('display','block');
+                    
                 }else{
                     $('.showdetailhtml').html(data['msg']);
                 }
@@ -174,7 +241,7 @@
 
 
       });
-    })
+
 
 
     //处理属性 为 lay-active 的所有元素事件
@@ -204,7 +271,13 @@
                         if(data['code']=='200'){
                             console.log(data['msg']);
                             console.log(data['data']['content']);
+                            $(".othershowdetailhtml").css('display','none');
                             $('.showdetailhtml').html(data['data']['content']);
+                            $("#data_1_0").css('display','block');
+                            $("#data_2_0").css('display','block');
+                            $("#data_3_0").css('display','block');
+                            $("#data_4_0").css('display','block');
+                            $("#data_5_0").css('display','block');
                         }else{
                             $('.showdetailhtml').html(data['msg']);
                         }
