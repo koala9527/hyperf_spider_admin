@@ -27,15 +27,15 @@ class CodeController extends BaseController
      * 获取列表
      *
      * @RequestMapping(path="getcodelistdata",methods = "get")
-     * 
+     *
      */
-    public function getcodelistdata(RequestInterface $request,ResponseInterface $response)
+    public function getcodelistdata(RequestInterface $request, ResponseInterface $response)
     {
- 
-        $one_class = $request->input('one_class',null);
-        $two_class =  $request->input('two_class',null);
-        $page = (int) $request->input('page', 1);
-        $page_size = (int) $request->input('limit', 20);
+
+        $one_class = $request->input('one_class', null);
+        $two_class = $request->input('two_class', null);
+        $page = (int)$request->input('page', 1);
+        $page_size = (int)$request->input('limit', 20);
         $keyword = $request->input('keyword', '');
         $spn = $request->input('spn', '');
         $three_class =  (string)$request->input('three_class','');
@@ -48,19 +48,19 @@ class CodeController extends BaseController
      * 获取列表页面
      *
      * @RequestMapping(path="showlisthtml",methods = "get")
-     * 
+     *
      */
-    public function showlisthtml(RequestInterface $request,RenderInterface $render)
+    public function showlisthtml(RequestInterface $request, RenderInterface $render)
     {
         $token = new Token();
         $request_token = $request->input('token');
         $user_id = $request->input('user_id');
-        if(empty($request_token) && empty($user_id)){
-            return $render->render('err',['msg'=>'没有登陆','url'=>'/login/mylogin']);
+        if (empty($request_token) && empty($user_id)) {
+            return $render->render('err', ['msg' => '没有登陆', 'url' => '/login/mylogin']);
         }
         $token_info = $token->get($request_token);
         if (!$token_info) {
-            return $render->render('err',['msg'=>'登录过期，请重新登录','url'=>'/login/mylogin']);
+            return $render->render('err', ['msg' => '登录过期，请重新登录', 'url' => '/login/mylogin']);
         }
         $user_info = Admin::query()->where(['id' => $user_id])->first(['username', 'avatar']);
         $one_class = $request->input('one_class','');
@@ -79,14 +79,14 @@ class CodeController extends BaseController
      * 获取二级分类
      *
      * @RequestMapping(path="getsecclass",methods = "get")
-     * 
+     *
      */
     public function getsecclass(RequestInterface $request)
     {
         $text = $request->input('onetag');
-        if(empty($text)){
-            $data =  [];
-        }else{
+        if (empty($text)) {
+            $data = [];
+        } else {
             $data = CodeDetailUpdate::getTwoClass($text);
         }
         return $data;
@@ -96,57 +96,57 @@ class CodeController extends BaseController
      * 获取列表页面
      *
      * @RequestMapping(path="code",methods = "get")
-     * 
+     *
      */
-    public function code(RenderInterface $render,RequestInterface $request)
+    public function code(RenderInterface $render, RequestInterface $request)
     {
         $token = new Token();
         $request_token = $request->input('token');
-        if(empty($request_token)){
-            return $render->render('err',['msg'=>'没有登陆','url'=>'/login/mylogin']);
+        if (empty($request_token)) {
+            return $render->render('err', ['msg' => '没有登陆', 'url' => '/login/mylogin']);
         }
         $token_info = $token->get($request_token);
         if (!$token_info) {
-            return $render->render('err',['msg'=>'登录过期，请重新登录','url'=>'/login/mylogin']);
+            return $render->render('err', ['msg' => '登录过期，请重新登录', 'url' => '/login/mylogin']);
         }
-        $id = $request->input('id',null);
-        $data=CodeDetailUpdate::getCodeDetail($id);
-        $news=[];
-        $fac=[];
-        if(!empty($data[0]['proObj'])){
-            $new = str_replace('\'','"',(string)$data[0]['proObj']);
+        $id = $request->input('id', null);
+        $data = CodeDetailUpdate::getCodeDetail($id);
+        $news = [];
+        $fac = [];
+        if (!empty($data[0]['proObj'])) {
+            $new = str_replace('\'', '"', (string)$data[0]['proObj']);
             $data_sec = json_decode($new, true);
-            if(!empty($data_sec)){
-                foreach($data_sec as $key=>$val){
-                    $news[$key]=$val['proId'];
+            if (!empty($data_sec)) {
+                foreach ($data_sec as $key => $val) {
+                    $news[$key] = $val['proId'];
                 }
             }
-        }else{
-            $data_sec=[];
+        } else {
+            $data_sec = [];
         }
-        return $render->render('code',['data'=>$data[0],'new'=>$news,'data_sec'=>$data_sec]);
+        return $render->render('code', ['data' => $data[0], 'new' => $news, 'data_sec' => $data_sec]);
     }
 
     /**
      * 获取指南
      *
-     * @RequestMapping(path="showguide",methods = "get")
-     * 
+     * @RequestMapping(path="showguide",methods = "get,post")
+     *
      */
     public function showguide(RequestInterface $request,RenderInterface $render,ResponseInterface $response)
     {
         $token = new Token();
         $request_token = $request->input('token');
-        if(empty($request_token)){
-            return $render->render('err',['msg'=>'没有登陆','url'=>'/login/mylogin']);
+        if (empty($request_token)) {
+            return $render->render('err', ['msg' => '没有登陆', 'url' => '/login/mylogin']);
         }
         $token_info = $token->get($request_token);
         if (!$token_info) {
-            return $render->render('err',['msg'=>'登录过期，请重新登录','url'=>'/login/mylogin']);
+            return $render->render('err', ['msg' => '登录过期，请重新登录', 'url' => '/login/mylogin']);
         }
         $id = $request->input('id');
         $text = $request->input('text');
-        if(empty($id)||empty($text)){
+        if (empty($id) || empty($text)) {
             return ['504'];
         }else{
             $data = CodeRe::getCodeGui($id,$text)[0];
@@ -165,9 +165,10 @@ class CodeController extends BaseController
      * 改变故障码的标记状态
      *
      * @RequestMapping(path="changestatus",methods = "get")
-     * 
+     *
      */
-    public function changestatus(RequestInterface $request){
+    public function changestatus(RequestInterface $request)
+    {
         $id = $request->input('id');
         $data = CodeDetailUpdate::changeStatus($id);
         return '更改已发送';

@@ -95,7 +95,6 @@
 <input type="hidden" value="" id='target'>
 </body>
 <script>
-
     $(function () {
       $(".proClick").click(function () {
         var content = $(this).text();
