@@ -86,11 +86,11 @@
     </div>
 </fieldset>
 
-<fieldset class="layui-elem-field">
+<!-- <fieldset class="layui-elem-field">
     <legend>加载详情：</legend>
     <div class="layui-field-box showdetailhtml" id="guides"></div>
     <div class="layui-field-box othershowdetailhtml"  style="display:none"></div>
-</fieldset>
+</fieldset> -->
 
 <input type="hidden" value="" id='target'>
 </body>
@@ -114,26 +114,36 @@
               url: '/admin/agent/showguide',
               dataType: 'json',
               data: { 'id': id, 'text': content,'token':token },
+              beforeSend:function () {
+                  this.layerIndex = layer.load(0, { shade: [0.5, '#393D49'] });
+              },
             success: function (data) {
               console.log(data);
                 if(data['code']=='200'){
                     console.log(data['msg']);
                     console.log(data['data']['content']);
-                    $("#others").css('display','block');
-                    $(".othershowdetailhtml").css('display','none');
-                    $('.showdetailhtml').html(data['data']['content']);
-                    $("#data_1_0").css('display','block');
-                    $("#data_2_0").css('display','block');
-                    $("#data_3_0").css('display','block');
-                    $("#data_4_0").css('display','block');
-                    $("#data_5_0").css('display','block');
+                    var htmls =data['data']['content'];
+                    layer.open({
+            type: 1,
+            skin: 'layui-layer-demo', //样式类名
+            title: '标题',
+            closeBtn: 1, 
+            anim: 2,
+            area: ['893px', '600px'],
+            shadeClose: true, //开启遮罩关闭
+            content: htmls
+        });
                     
                 }else{
-                    $("#others").css('display','block');
-                    $('.showdetailhtml').html(data['msg']);
+  
+                    layer.alert(data['msg'])
+                    // $('.showdetailhtml').html(data['msg']);
                 }
 
             },
+            complete: function () {
+                  layer.close(this.layerIndex);
+              },
             error: function (error) {
               console.log(error)
             }
@@ -146,51 +156,7 @@
       })
     });
 
-      $(".open-term").click(function () {
-        var content = $(this).text();
-        var val = $(this).attr("proid");
-        console.log(content);
-        console.log(val);
-        if ($('#selected').length > 0) {
-          var id = $("#selected").attr("value");
-          console.log("开始加载")
-          //做标记给后面换电控系统识别
-          $('#target').attr("value", content);//给一个隐藏的元素添加content的值，后面好取一点
-          var token = localStorage.getItem("token");
-//get()方式
-          $.ajax({
-              url: '/admin/agent/showguide',
-              dataType: 'json',
-              data: { 'id': id, 'text': content,'token':token },
-            success: function (data) {
-              console.log(data);
-                if(data['code']=='200'){
-                    console.log(data['msg']);
-                    console.log(data['data']['content']);
-                    $(".othershowdetailhtml").css('display','none');
-                    $('.showdetailhtml').html(data['data']['content']);
-                    $("#data_1_0").css('display','block');
-                    $("#data_2_0").css('display','block');
-                    $("#data_3_0").css('display','block');
-                    $("#data_4_0").css('display','block');
-                    $("#data_5_0").css('display','block');
-                }else{
-                    $('.showdetailhtml').html(data['data']['content']);
 
-                }
-
-            },
-            error: function (error) {
-              console.log(error)
-            }
-          })
-        } else {
-
-          layer.msg('还没有选择电控系统！');
-        }
-
-
-      });
 
 
       $("body").delegate(".open-term","click", function(){
@@ -202,33 +168,39 @@
           //做标记给后面换电控系统识别
           $('#target').attr("value", content);//给一个隐藏的元素添加content的值，后面好取一点
           var token = localStorage.getItem("token");
-//get()方式
           $.ajax({
               url: '/admin/agent/showguide',
               dataType: 'json',
               data: { 'id': id, 'text': content,'token':token },
+              beforeSend:function () {
+                  this.layerIndex = layer.load(0, { shade: [0.5, '#393D49'] });
+              },
             success: function (data) {
               console.log(data);
                 if(data['code']=='200'){
                     console.log(data['msg']);
                     console.log(data['data']['content']);
                     
-                    $(".othershowdetailhtml").css('display','block');
-                    $('.othershowdetailhtml').html(data['data']['content']);
-                    if ($('.showdetailhtml').html() == $(".othershowdetailhtml").html()){
-                        $(".othershowdetailhtml").css('display','none');
-                    }
-                    $("#data_1_0").css('display','block');
-                    $("#data_2_0").css('display','block');
-                    $("#data_3_0").css('display','block');
-                    $("#data_4_0").css('display','block');
-                    $("#data_5_0").css('display','block');
+                    var htmls =data['data']['content'];
+                    layer.open({
+            type: 1,
+            skin: 'layui-layer-demo', //样式类名
+            title: '标题',
+            closeBtn: 1, 
+            anim: 2,
+            area: ['893px', '600px'],
+            shadeClose: true, //开启遮罩关闭
+            content: htmls
+        });
                     
                 }else{
-                    $('.showdetailhtml').html(data['msg']);
+                  layer.alert(data['msg'])
                 }
 
             },
+            complete: function () {
+                  layer.close(this.layerIndex);
+              },
             error: function (error) {
               console.log(error)
             }
@@ -266,21 +238,31 @@
                     url: '/admin/agent/showguide',
                     dataType: 'json',
                     data: { 'id': val, 'text': content,'token':token },
+                    beforeSend:function () {
+                  this.layerIndex = layer.load(0, { shade: [0.5, '#393D49'] });
+              },
                     success: function (data) {
                         if(data['code']=='200'){
                             console.log(data['msg']);
                             console.log(data['data']['content']);
-                            $(".othershowdetailhtml").css('display','none');
-                            $('.showdetailhtml').html(data['data']['content']);
-                            $("#data_1_0").css('display','block');
-                            $("#data_2_0").css('display','block');
-                            $("#data_3_0").css('display','block');
-                            $("#data_4_0").css('display','block');
-                            $("#data_5_0").css('display','block');
+                            var htmls =data['data']['content'];
+                    layer.open({
+            type: 1,
+            skin: 'layui-layer-demo', //样式类名
+            title: '标题',
+            closeBtn: 1, 
+            anim: 2,
+            area: ['893px', '600px'],
+            shadeClose: true, //开启遮罩关闭
+            content: htmls
+        });
                         }else{
-                            $('.showdetailhtml').html(data['msg']);
+                          layer.alert(data['msg'])
                         }
                     },
+                    complete: function () {
+                  layer.close(this.layerIndex);
+              },
                     error: function (error) {
                         console.log(error)
                     }
@@ -290,6 +272,57 @@
 
         });
 
+        $("body").delegate(".proClick.clickItem","click", function(){
+          var content = $(this).text();
+        var id = $("#selected").attr("value");
+        if ($('#selected').length > 0) {
+          var id = $("#selected").attr("value");
+          console.log("开始加载")
+          //做标记给后面换电控系统识别
+          $('#target').attr("value", content);//给一个隐藏的元素添加content的值，后面好取一点
+          var token = localStorage.getItem("token");
+          $.ajax({
+              url: '/admin/agent/showguide',
+              dataType: 'json',
+              data: { 'id': id, 'text': content,'token':token },
+              beforeSend:function () {
+                  this.layerIndex = layer.load(0, { shade: [0.5, '#393D49'] });
+              },
+            success: function (data) {
+              console.log(data);
+                if(data['code']=='200'){
+                    console.log(data['msg']);
+                    console.log(data['data']['content']);
+                    var htmls =data['data']['content'];
+                    layer.open({
+            type: 1,
+            skin: 'layui-layer-demo', //样式类名
+            title: '标题',
+            closeBtn: 1, 
+            anim: 2,
+            area: ['893px', '600px'],
+            shadeClose: true, //开启遮罩关闭
+            content: htmls
+        });
+                    
+                }else{
+                  layer.alert(data['msg'])
+                }
+
+            },
+            complete: function () {
+                  layer.close(this.layerIndex);
+              },
+            error: function (error) {
+              console.log(error)
+            }
+          })
+        } else {
+
+          layer.msg('还没有选择电控系统！');
+        }
+        }
+        )
     })
 </script>
 </html>
