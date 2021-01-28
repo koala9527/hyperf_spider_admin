@@ -16,8 +16,7 @@ jobs:
         name: koala/hyperf_spider_admin
         username: ${{ secrets.ALI_DOCKER_USERNAME }}
         password: ${{ secrets.ALI_DOCKER_USERNAME }}
-        tag_names: true
         cache: true
-        repository: registry.cn-shenzhen.aliyuncs.com/koala9527/koala
+        registry: registry.cn-shenzhen.aliyuncs.com/koala9527/koala
         tag_with_ref: true
 
