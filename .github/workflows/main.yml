@@ -1,18 +1,23 @@
-name: Publish Docker image
+name: Build Image
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+      - 'main'
+    paths-ignore:
+      - "README.md"
 jobs:
-  push_to_registry:
-    name: Push Docker image to Docker Hub
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v2
-      - name: Push to Docker Hub
-        uses: docker/build-push-action@v1
-        with:
-          username: koala95271
-          password: jijiwaiwai123
-          repository: registry.cn-shenzhen.aliyuncs.com/koala9527/koala
-          tag_with_ref: true
+    - uses: actions/checkout@master
+    - name: Publish to Registry
+      uses: koala/Publish-Docker-Github-Action@main
+      with:
+        name: koala/hyperf_spider_admin
+        username: ${{ secrets.ALI_DOCKER_USERNAME }}
+        password: ${{ secrets.ALI_DOCKER_USERNAME }}
+        tag_names: true
+        cache: true
+        repository: registry.cn-shenzhen.aliyuncs.com/koala9527/koala
+        tag_with_ref: true
+
