@@ -18,5 +18,5 @@ jobs:
         password: ${{ secrets.ALI_DOCKER_USERNAME }}
         cache: true
         registry: registry.cn-shenzhen.aliyuncs.com/koala9527/koala
-        tag_with_ref: true
+     
 
