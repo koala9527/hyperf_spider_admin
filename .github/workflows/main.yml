@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Publish to Registry
-      uses: koala/Publish-Docker-Github-Action@main
+      uses: koala9527/hyperf_spider_admin@main
       with:
         name: koala/hyperf_spider_admin
         username: ${{ secrets.ALI_DOCKER_USERNAME }}
