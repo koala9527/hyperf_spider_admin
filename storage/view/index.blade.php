@@ -86,10 +86,20 @@ form {
           <img src="/img/ava.jpg" class="layui-nav-img">
           {{$username}}
         </a>
-
       </li>
+
+      <li class="layui-nav-item new_list">
+      <a href=""><span>新版</span></a>
+      </li>
+
+      <li class="layui-nav-item old_list">
+      <a href=""><span>旧版</span></a>
+      </li>
+
       <li class="layui-nav-item">
-      <div class='logout'>退了</div></li>
+      <div class='logout'>退了</div>
+      </li>
+
     </ul>
 
 
@@ -255,6 +265,16 @@ layui.use(['form', 'layedit','table','element','laytpl'], function(){
    });
 });
 });
+
+$(".new_list").click(function(){
+    var token = localStorage.getItem("token");
+    window.location.href = "/admin/agent/newshowlisthtml"+"?token="+token
+})
+
+$(".old_list").click(function(){
+    var token = localStorage.getItem("token");
+    window.location.href = "/admin/agent/showlisthtml"+"?token="+token
+})
 </script>
 </body>
 </html>
